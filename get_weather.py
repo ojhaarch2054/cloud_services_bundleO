@@ -1,3 +1,7 @@
+"""
+This module fetches and displays the weather information for a specified city.
+"""
+
 import requests
 from bs4 import BeautifulSoup
 
@@ -5,7 +9,13 @@ from bs4 import BeautifulSoup
 CITY = 'Oulu'
 BASE_URL = f'https://www.weather-forecast.com/locations/{CITY}/forecasts/latest'
 
-def get_weather(city):
+def get_weather():
+    """
+    Fetches the weather information for the specified city.
+
+    Returns:
+        str: The weather information.
+    """
     # Send GET request
     response = requests.get(BASE_URL)
     response.raise_for_status()  # Check if the request was successful
@@ -20,7 +30,9 @@ def get_weather(city):
 
 if __name__ == '__main__':
     try:
-        weather = get_weather(CITY)
+        weather = get_weather()
         print(f"Weather in {CITY}: {weather}")
+    except requests.RequestException as e:
+        print(f"An error occurred with the request: {e}")
     except Exception as e:
-        print(f"An error occurred: {e}")
+        print(f"An unexpected error occurred: {e}")
