@@ -16,8 +16,8 @@ def get_weather():
     Returns:
         str: The weather information.
     """
-    # Send GET request
-    response = requests.get(BASE_URL)
+    # Send GET request with timeout
+    response = requests.get(BASE_URL, timeout=10)
     response.raise_for_status()  # Check if the request was successful
 
     # Parse HTML
@@ -34,5 +34,5 @@ if __name__ == '__main__':
         print(f"Weather in {CITY}: {weather}")
     except requests.RequestException as e:
         print(f"An error occurred with the request: {e}")
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+    except (requests.Timeout, requests.ConnectionError) as e:
+        print(f"A network error occurred: {e}")
