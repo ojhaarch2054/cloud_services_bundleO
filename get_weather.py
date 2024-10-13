@@ -32,7 +32,7 @@ if __name__ == '__main__':
     try:
         weather = get_weather()
         print(f"Weather in {CITY}: {weather}")
-    except requests.RequestException as e:
-        print(f"An error occurred with the request: {e}")
     except (requests.Timeout, requests.ConnectionError) as e:
         print(f"A network error occurred: {e}")
+    except requests.RequestException as e:
+        print(f"An error occurred with the request: {e}")
